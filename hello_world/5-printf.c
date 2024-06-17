@@ -1,8 +1,12 @@
 #include <stdio.h>
 
-/** the function print
- *  a message and must alway reurn 0 
-*/
+/**
+ *  main - the function print
+ *  a message and
+ *  must alway return 0
+ *
+ *  Return: always 0
+ */
 
 int main(void)
 {
