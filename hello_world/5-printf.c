@@ -1,4 +1,5 @@
 #include <stdio.h>
+/* the function print a message and must alway reurn 0 */
 
 int main(void)
 	{
