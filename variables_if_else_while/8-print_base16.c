@@ -9,12 +9,16 @@
 
 int main(void)
 {
-	int n;
-
-	for (n = 0; n < 10 && 61 <= n <= 66 ; n++)
+	unsigned char n;
+	unsigned char m;
+	
+	for (n = 0; n < 10; n++)
 	{
 		putchar('0' + n);
-		putchar("61" + n);
+	}
+	for (m = 61; m < 66; m++)
+	{
+		putchar("61" + m);
 	}
 
 	putchar('\n');
