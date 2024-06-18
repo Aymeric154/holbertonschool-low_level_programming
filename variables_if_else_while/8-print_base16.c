@@ -9,8 +9,8 @@
 
 int main(void)
 {
-	unsigned char n;
-	unsigned char m;
+	char n;
+	char m;
 	
 	for (n = 0; n < 10; n++)
 	{
