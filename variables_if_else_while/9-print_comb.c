@@ -14,7 +14,10 @@ int main(void)
 	for (n = 0; n < 10; n++)
 	{
 		putchar('0' + n);
-		putchar(',');
+	}
+	for (n = 0; n < 10; n++)
+	{
+		putchar(', ');
 	}
 
 	putchar('\n');
