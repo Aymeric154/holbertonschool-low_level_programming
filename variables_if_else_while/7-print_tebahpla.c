@@ -12,8 +12,11 @@ int main(void)
 
 	for (apbt = 'z' ; apbt <= 'a'; apbt++)
 	{
+
 		putchar(apbt);
+
 	}
+
 
 	putchar('\n');
 
