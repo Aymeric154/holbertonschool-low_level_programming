@@ -12,12 +12,12 @@ int main(void)
 {
 	char alpb;
 
-	for (alpb = 'a' ; alpb <= 'b' ; alpb++)
+	for (alpb = 'a' ; alpb <= 'z' ; alpb++)
 
 		putchar(alpb);
 
 
-	for (alpb = 'A' ; alpb <= 'B' ; alpb++)
+	for (alpb = 'A' ; alpb <= 'Z' ; alpb++)
 
 		putchar(alpb);
 
