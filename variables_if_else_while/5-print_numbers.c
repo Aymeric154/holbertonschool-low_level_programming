@@ -13,7 +13,7 @@ int main(void)
 	
 	n = 0;
 
-	if (n < 10 )
+	if (n <= 10 )
 	{
 		printf ("%d, ", n);
 	}
