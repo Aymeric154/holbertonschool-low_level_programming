@@ -17,7 +17,7 @@ int main(void)
 		putchar(alpb);
 	}
 
-	for( alpb ='a' ; alpb <= 'b' ; alpb++)
+	for( alpb = 'a' ; alpb <= 'b' ; alpb++)
 	{
 		putchar(alpb);
 	}
