@@ -8,6 +8,11 @@
 
 int main(void)
 {
-	printf ("_putchar");
-	return (0);
+	char _putchar
+
+	printf (_putchar);
+	return (0)
+
 }
+
+
