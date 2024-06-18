@@ -16,7 +16,8 @@ int main(void)
 	if (n < 10 )
 	{
 		printf ("%d, ", n);
-		return (0);
 	}
+
+	return (0);
 
 }
