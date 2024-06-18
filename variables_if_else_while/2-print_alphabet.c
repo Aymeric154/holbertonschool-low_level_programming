@@ -9,16 +9,11 @@
 
 int main(void)
 {
+	int apbt;
 
-	char start = "a";
-	char end = "z";
-
-	char alphabet = start;
-
-	while (start != end)
+	for (apbt = "a" ; apbt<= "z"; apbt++)
 	{
-		putchar (start);
-		start++;
+		putchar(apbt);
 	}
 
 	return (0);
