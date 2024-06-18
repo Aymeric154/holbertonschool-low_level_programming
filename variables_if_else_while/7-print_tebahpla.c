@@ -10,7 +10,7 @@ int main(void)
 {
 	char apbt;
 
-	for (apbt = 'z' ; apbt >= 'z'; apbt--)
+	for (apbt = 'z' ; apbt >= 'a'; apbt--)
 	{
 
 		putchar(apbt);
