@@ -10,6 +10,8 @@
 int main(void)
 {
 	int n;
+	
+	n = 0
 
 	if (n < 10 )
 	{
