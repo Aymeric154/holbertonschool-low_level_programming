@@ -9,7 +9,7 @@
 
 int main(void)
 {
-	int apbt;
+	char apbt;
 
 	for (apbt = 'a' ; apbt <= 'z'; apbt++)
 	{
