@@ -11,7 +11,7 @@ int main(void)
 {
 	int apbt;
 
-	for (apbt = "a" ; apbt<= "z"; apbt++)
+	for (apbt = 'a' ; apbt<= 'z'; apbt++)
 	{
 		putchar(apbt);
 	}
