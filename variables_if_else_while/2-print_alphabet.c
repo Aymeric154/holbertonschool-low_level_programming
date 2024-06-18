@@ -13,7 +13,7 @@ int main(void)
 	char start = "a";
 	char end = "z";
 
-	char alphabet = alphabetStart;
+	char alphabet = start;
 
 	while (start != end)
 	{
