@@ -8,7 +8,6 @@
 
 int _islower(int c)
 {
-	char c = "c";
 	
 	if (islower(c) != 0)
 	{
