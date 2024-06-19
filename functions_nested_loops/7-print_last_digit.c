@@ -9,11 +9,11 @@
 
 int print_last_digit(int x)
 {
-	if (x % 10)
-	{
-		return (x);
+	int lastDigit = x % 10;
+
+	if (lastDigit = lastDigit(x))
+
+		return lastDigit;
 	}
-
-	return (0);
-
+	return(0);
 }
