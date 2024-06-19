@@ -12,7 +12,7 @@ int main(void)
 
 	for (c = 'a' ; c <= 'z' ; c++)
 	{
-		islower(63);
+		_islower(63);
 		_putchar(c);
 	}
 
