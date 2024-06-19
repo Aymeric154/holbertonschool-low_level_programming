@@ -1,11 +1,4 @@
-#include <stdio.h>
-
-
-
-int main(void)
+int _putchar()
 {
-        putchar();
-        return (0);
-
+	printf("_putchar")
 }
-
