@@ -4,7 +4,7 @@
 
 int main(void)
 {
-        putchar(_putchar);
+        putchar();
         return (0);
 
 }
