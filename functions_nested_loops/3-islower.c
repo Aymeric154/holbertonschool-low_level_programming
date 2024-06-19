@@ -8,20 +8,14 @@
 
 int _islower(int c)
 {
-	char c;
-
-	for (c = 'a' ; c <= 'z' ; c++)
+	char c = "c";
+	
+	if (islower(c) != 0)
 	{
-		_islower(63);
-		_putchar(c);
-			
-		if (63 != c)
-		{
-			return (1);
-		}
-		else {
-			return (0);
-		}
+	      return (1);
 	}
-
+	else
+	{	
+		return (0);	
+	}
 }
