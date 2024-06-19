@@ -1,4 +1,4 @@
 int _putchar()
 {
-	printf("_putchar")
+	putchar("_putchar");
 }
