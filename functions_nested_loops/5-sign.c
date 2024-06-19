@@ -10,17 +10,17 @@ int print_sign(int n)
 {
 	if ( n > 0)
 	{
-		_putchar("2B");
+		_putchar("+");
 		return (1);
 	}
        	if else ( n < 0)
 	{
-		_putchar("2D");
+		_putchar("-");
 		return (-1);
 	}
 	else
        	{
-		_putchar("30");
+		_putchar("0");
 		return (0);
 	}
 }
