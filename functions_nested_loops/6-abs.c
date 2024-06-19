@@ -13,4 +13,6 @@ int _abs(int x)
 	{
 		return(x);
 	}
+
+	return (0);
 }
