@@ -10,7 +10,7 @@ int main(void)
 {
 	char c;
 
-	while (c <= "z")
+	while (c < "z")
 	{
 		_putchar(c);
 		c++;
