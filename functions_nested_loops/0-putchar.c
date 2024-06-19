@@ -6,10 +6,10 @@
  *  Return: alway zero
  */
 
-int _putchar()
+int main(void)
 {	
 	 
-	putchar("5Fputchar");
+	_putchar();
 	return (0);
 }
 
