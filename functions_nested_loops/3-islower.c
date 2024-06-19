@@ -2,7 +2,7 @@
 
 /**
  * main  -  function that checks for lowercase character.
- * @c - c is lowercase
+ * @c : is lowercase
  * Return: 0
  */
 
