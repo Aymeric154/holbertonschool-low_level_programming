@@ -8,6 +8,10 @@
 
 int _abs(int)
 {
-	_putchar(int);	
-	return (0);
+	int x;
+
+	if ( x > 0)
+	{
+		return(x);
+	}
 }
