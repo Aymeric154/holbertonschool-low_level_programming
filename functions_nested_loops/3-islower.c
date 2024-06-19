@@ -14,6 +14,14 @@ int main(void)
 	{
 		_islower(63);
 		_putchar(c);
+			
+		if (63 != c)
+		{
+			return (1);
+		}
+		else {
+			return (0);
+		}
 	}
 
 }
