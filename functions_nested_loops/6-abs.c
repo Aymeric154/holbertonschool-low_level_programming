@@ -15,7 +15,7 @@ int _abs(int x)
 	}
 	else if (x <=0)
 	{
-		n = n * -1;
+		x = x * -1;
 		return (x);
 	else
 	{
