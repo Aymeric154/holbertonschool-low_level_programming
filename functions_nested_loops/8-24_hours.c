@@ -22,9 +22,10 @@ void jack_bauer(void)
 					{
 						_putchar(hour + '0');
 						_putchar(h + '0');
-						_putchar(':');
+						_putchar(58);
 						_putchar(minute + '0');
 						_putchar(m + '0');
+						-putchar('\n');
 					}
 				}
 			}
