@@ -3,7 +3,6 @@
 /**
  * print_last_digit - prints the last digit of a number.
  *
- * @lastDigit: number to check
  * @n: is integer
  *
  * Result: lastDigit
