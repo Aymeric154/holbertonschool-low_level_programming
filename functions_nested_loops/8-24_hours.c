@@ -21,15 +21,15 @@ void jack_bauer(void)
 				while (minute < 5)
 				{
 					minute++;
-						while (m < 9)
-						{
-							m++;
-							_putchar(hour + '0');
-							_putchar(h + '0');
-							_putchar(':');
-							_putchar(minute + '0');
-							_putchar(m + '0');
-						}
+					while (m < 9)
+					{
+						m++;
+						_putchar(hour + '0');
+						_putchar(h + '0');
+						_putchar(':');
+						_putchar(minute + '0');
+						_putchar(m + '0');
+					}
 				}
 			}
 		}
