@@ -6,7 +6,7 @@
  * @lastDigit: number to check
  * @n: is integer
  *
- * Result: 0.
+ * Result: lastDigit
  */
 
 int print_last_digit(int n)
