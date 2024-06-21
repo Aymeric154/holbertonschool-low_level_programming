@@ -3,6 +3,9 @@
 /**
  * print_to_98 - prints all natural numbers from n to 98.
  *
+ * @n: is integer
+ * @i: is integer
+ *
  * Return: always zero
  */
 
