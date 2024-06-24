@@ -5,7 +5,7 @@
  *
  * @c: is a digit
  *
- * Return : alway zero
+ * Return: alway zero
  */
 
 int _isdigit(int c)
