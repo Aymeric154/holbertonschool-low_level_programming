@@ -3,7 +3,6 @@
 /**
  * print_line - function that draws a straight line in the terminal
  *
- * @m: is an integer
  * @n: is an integer
  *
  * Return: always zero
