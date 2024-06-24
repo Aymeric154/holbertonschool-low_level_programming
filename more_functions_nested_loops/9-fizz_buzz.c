@@ -26,7 +26,8 @@ int main(void)
 		}
 		else 
 		{
-			printf("%d ", number
-		return (0);
+			printf("%d ", number);
+		}
+		return (number);
 	}
 }
