@@ -14,16 +14,19 @@ int main(void)
 	{
 		if (number / 3 && number / 5)
 		{
-			printf("FizzBuzz");
+			printf("FizzBuzz ");
 		}
-		if (number / 3)
+		else if (number / 3)
 		{
-			printf("Fizz");
+			printf("Fizz ");
 		}
-		if (number / 5)
+		else if (number / 5)
 		{
-			printf("Buzz");
+			printf("Buzz ");
 		}
+		else 
+		{
+			printf("%d ", number
 		return (0);
 	}
 }
