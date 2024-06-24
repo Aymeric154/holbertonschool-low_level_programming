@@ -6,7 +6,7 @@
  * Return: alway zero
  */
 
-int main(void)
+int main()
 {
 	int number;
 
