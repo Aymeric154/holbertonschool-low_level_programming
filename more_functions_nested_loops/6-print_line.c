@@ -3,6 +3,9 @@
 /**
  * print_line - function that draws a straight line in the terminal
  *
+ * @m: is an integer
+ * @n: is an integer
+ *
  * Return: always zero
  */
 
@@ -10,11 +13,11 @@ void print_line(int n)
 {
 	int m;
 
-	if ( n < 0)
+	if (n < 0)
 	{
 		_putchar('\n');
 	}
-	else 
+	else
 	{
 		for (m = 0; m < n ; m++)
 		{
