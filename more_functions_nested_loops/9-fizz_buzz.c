@@ -16,11 +16,11 @@ int main(void)
 		{
 			printf("FizzBuzz ");
 		}
-		 if (number % 3 == 0)
+	 	else if (number % 3 == 0)
 		{
 			printf("Fizz ");
 		}
-		if (number % 5 == 0)
+		else if (number % 5 == 0)
 		{
 			printf("Buzz ");
 		}
