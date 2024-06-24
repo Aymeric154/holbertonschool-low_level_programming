@@ -2,7 +2,7 @@
 
 /**
  * print_triangle - a function that prints a triangle
- *
+ * @size: is the size of the triangle
  * Return: always zero
  */
 
@@ -21,7 +21,7 @@ void print_triangle(int size)
 			{
 				_putchar(32);
 			}
-			for (o = 0; o <= n; o++) 
+			for (o = 0; o <= n; o++)
 			{
 				_putchar(35);
 			}
