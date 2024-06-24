@@ -6,7 +6,7 @@
  * Return: alway zero
  */
 
-int main()
+int main(void)
 {
 	int number;
 
@@ -28,7 +28,6 @@ int main()
 		{
 			printf("%d ", number);
 		}
-
-		return (0);
 	}
+	return (0);
 }
