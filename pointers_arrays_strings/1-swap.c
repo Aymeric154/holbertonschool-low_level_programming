@@ -2,7 +2,7 @@
 
 /**
  * a function that swaps the values of two integers
- * 
+ *
  * @a: name of the variable
  * @b: name of the variable
  *
