@@ -3,20 +3,20 @@
 /**
  * puts2 -  function that prints every other character of a string
  *
- * @str:
+ * @str: is character
  *
  * Return: 0
  */
 
 void puts2(char *str)
 {
-	int i, j;
+	int i;
 
 	for (i = 0; str[i] != 0; i++)
 	{
-	for(j = 0; j % 2; j++)
+		if (i % 2 == 0)
 		{
-		_putchar(str[j]);
+			_putchar(str[i]);
 		}
 	}
 	_putchar('\n');
