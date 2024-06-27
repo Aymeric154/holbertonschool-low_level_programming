@@ -25,7 +25,7 @@ int _atoi(char *s)
 			if (i / 10 != j)
 			{
 
-				return (0);
+				return (j * n);
 			}
 
 		}
