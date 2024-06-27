@@ -12,7 +12,7 @@ int _atoi(char *s)
 {
 	int i = 0, n = 1, j;
 
-	while (*s)
+	while (*s != 0)
 	{
 		if (*s == '-')
 
