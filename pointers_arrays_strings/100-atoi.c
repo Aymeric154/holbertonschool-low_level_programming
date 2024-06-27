@@ -16,7 +16,7 @@ int _atoi(char *s)
 	{
 		if (*s == '-')
 
-			n *= -1;
+			n = n * -1;
 		else if	(*s >= '0' && *s <= '9')
 		{
 			j = i;
@@ -25,7 +25,7 @@ int _atoi(char *s)
 			if (i / 10 != j)
 			{
 
-				return (j * n);
+				return (0);
 			}
 
 		}
