@@ -3,9 +3,9 @@
 /**
  * *_strncat
  *
- * @dest:
- * @src:
- * @n:
+ * @dest: is string
+ * @src: is string
+ * @n: is bytes
  *
  * return: 0
  */
