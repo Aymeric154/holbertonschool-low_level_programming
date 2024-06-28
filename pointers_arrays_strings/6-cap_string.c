@@ -10,20 +10,27 @@
 
 char *cap_string(char *s)
 {
-	int i = 0, j = 0;
+	int i, j;
+	char n[] = " \t\n,;.!?\"(){}";
 
-	while (s[i] != 0)
+
+	for (i = 0; s[i] != 0; i++)
 	{
-		if ((j % 2 == 1) && s[i] >= 'a' && s[i] <= 'z')
+		if (i == 0 && s[i] >= 'a' && s[i] <= 'z')
 		{
 			s[i] = s[i] - 32;
 		}
-		else if (s[i] == ' ')
+		for (j = 0; n[j] != 0; j++)
 		{
-			j++;
+			if (s[i] == n[j])
+			{
+				if (s[i] >= 'a' && s[i] <= 'z')
+				{
+					s[i] = s[i] - 32;
+				}
+			}
 		}
-		i++;
-		
 	}
-	return (0);
+	return (s);
+
 }
