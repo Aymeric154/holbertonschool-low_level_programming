@@ -22,7 +22,7 @@ char *cap_string(char *s)
 			{
 				if (s[i] == n[j])
 				{
-					if (si[i + 1] >= 'a' && s[i + 1] <= 'z')
+					if (s[i + 1] >= 'a' && s[i + 1] <= 'z')
 					{
 						s[i + 1] -= 32;
 					}
