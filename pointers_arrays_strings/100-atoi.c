@@ -10,13 +10,17 @@
 
 int _atoi(char *s)
 {
-	int i = 0, n = 1, j;
+	int i = 0, n = 1; 
+	int j = 0;
 
 	while (*s != 0)
 	{
 		if (*s == '-')
+		{
 
 			n = n * -1;
+		}
+
 		else if	(*s >= '0' && *s <= '9')
 		{
 			j = i;
@@ -29,7 +33,7 @@ int _atoi(char *s)
 			}
 
 		}
-		else if (i != 0)
+		else if (i > 0)
 			break;
 		s++;
 	}
