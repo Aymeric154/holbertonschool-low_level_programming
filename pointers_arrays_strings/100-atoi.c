@@ -23,7 +23,7 @@ int _atoi(char *s)
 
 		else if	(s[i] >= '0' && s[i] <= '9')
 		{
-			i = i * 10 + (s[i] - '0');
+			j = j * 10 + (s[i] - '0');
 
 			if (s[i + 1] < '0' || s[i + 1] > '9')
 			{
@@ -36,5 +36,5 @@ int _atoi(char *s)
 			break;
 		s++;
 	}
-	return (i * n);
+	return (n * j);
 }
