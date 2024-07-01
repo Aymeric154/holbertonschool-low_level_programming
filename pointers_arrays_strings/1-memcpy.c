@@ -3,9 +3,9 @@
 /**
  * *_memcpy - function that copies memory area.
  *
- * @dest:
- * @src:
- * @n:
+ * @dest: pointer to the destination
+ * @src: pointer to the source
+ * @n: number to copie
  *
  * Return: dest
  */
