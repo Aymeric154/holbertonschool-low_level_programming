@@ -3,7 +3,7 @@
 /**
  * _puts_recursion - function that prints a string, followed by a new line.
  *
- * @s:
+ * @s: string to be print
  *
  * Return: 0
  */
@@ -11,11 +11,12 @@
 void _puts_recursion(char *s)
 {
 	int i = 0;
-	
+
 	if (s[i] != 0)
 	{
 		_putchar(s[i]);
 	}
+	else
 	_putchar('\n');
 
 }
