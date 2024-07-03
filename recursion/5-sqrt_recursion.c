@@ -14,16 +14,16 @@ int _sqrt_recursion(int n)
 {
 	if (n < 0)
 	{
-		return(-1);
+		return (-1);
 	}
-	return sqrt_helper(n, 0);
+	return (sqrt_helper(n, 0));
 }
 
 /**
  * sqrt_helper - recurses to find the natural
  * square root of a number
  *
- *@i: 
+ *@i: our current guess
  *@n: number to calculate square root
  *
  * Return: result of square root
