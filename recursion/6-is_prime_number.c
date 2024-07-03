@@ -6,6 +6,8 @@ int check_prime(int n, int i);
  * if the input integer is a prime number,
  * otherwise return 0.
  *
+ * check_prime - function to check a prime
+ *
  * @n: prime number
  *
  * Return: 0 or 1
