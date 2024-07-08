@@ -2,11 +2,12 @@
 #include <stdlib.h>
 
 /**
- * *_strdup - nction that returns a pointer to a newly allocated space in memory
+ * *_strdup - nction that returns a pointer to
+ * a newly allocated space in memory
  *
- * @str:
+ * @str: pointer to character
  *
- * Return:
+ * Return: i
  */
 
 char *_strdup(char *str)
@@ -15,17 +16,17 @@ char *_strdup(char *str)
 	int j = 0;
 
 	if (str == 0)
-	{ 
+	{
 		return (NULL);
 	}
-	
-	while(str[j] != 0)
+
+	while (str[j] != 0)
 	{
 		j++;
 	}
-	
+
 	i = malloc(sizeof(char) * str[j]);
-	
+
 	if (i == 0)
 	{
 		return (NULL);
