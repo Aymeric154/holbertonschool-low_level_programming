@@ -5,7 +5,7 @@
  * *_strdup - nction that returns a pointer to
  * a newly allocated space in memory
  *
- * @str: pointer to character
+ * @str: string to duplicate
  *
  * Return: i
  */
@@ -13,7 +13,7 @@
 char *_strdup(char *str)
 {
 	char *i;
-	int j = 0;
+	unsigned int j = 0;
 
 	if (str == 0)
 	{
