@@ -4,10 +4,10 @@
 /**
  * *str_concat - Write a function that concatenates two strings.
  *
- * @s1: 
- * @s2:
+ * @s1: string
+ * @s2: string
  *
- * Return: 
+ * Return: a
  */
 
 char *str_concat(char *s1, char *s2)
