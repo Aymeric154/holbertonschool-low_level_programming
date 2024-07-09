@@ -51,8 +51,5 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 		s3[i] = s2[j];
 	}
 
-	return (s3);if (s3 == NULL)
-	{
-		return (NULL);
-	}
+	return (s3);
 }
