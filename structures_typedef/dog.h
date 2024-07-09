@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include "dog.h"
 /**
  * struct dog - dog data
  *
