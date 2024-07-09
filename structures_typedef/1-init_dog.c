@@ -12,7 +12,7 @@
  * Return: 0
  */
 
-void init_dog(struct dog *d, char *name, float age, char *owner)
+int main(void)
 {
 	struct dog my_dog
 	{
