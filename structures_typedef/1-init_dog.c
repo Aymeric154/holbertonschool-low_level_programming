@@ -2,12 +2,7 @@
 #include "dog.h"
 
 /**
- * main- function that initialize a variable of type struct dog
- *
- * @d: structure
- * @name: name of dog
- * @age: age of the dog
- * @owner: property of dog
+ * main- function that initialize a variable of type struct
  *
  * Return: 0
  */
