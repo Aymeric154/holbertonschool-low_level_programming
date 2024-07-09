@@ -7,9 +7,9 @@
  *
  * @name: name of the dog
  * @age: age of the dog
- * @owner: name of the owner of the dog
+ * @owner: name of the dog
  *
- * Description: Defines metadata about the dog and type of dog's struct
+ * Description: Define lements of dog
  */
 
 struct dog 
@@ -17,4 +17,4 @@ struct dog
 	char *name;
 	float age;
 	char *owner;
-}
+};
