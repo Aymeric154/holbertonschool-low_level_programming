@@ -1,4 +1,5 @@
-
+#ifndef Dog
+#define Dog
 
 
 /**
