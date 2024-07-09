@@ -8,7 +8,7 @@
  * @s2: string two
  * @n: unsigned integer
  *
- * Return: 
+ * Return: s3
  */
 
 char *string_nconcat(char *s1, char *s2, unsigned int n)
@@ -21,7 +21,6 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	if (!s2)
 		s2 = "";
 
-
 	while (s1[len1])
 	{
 		len1++;
@@ -30,7 +29,6 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	{
 		len2++;
 	}
-
 	if (n >= len2)
 	{
 		s3 = malloc(sizeof(char) * (len1 + len2 + 1));
@@ -52,6 +50,5 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 		s3[i] = s2[j];
 	}
 
-	s3[i] = 0;
 	return (s3);
 }
