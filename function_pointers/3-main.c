@@ -10,20 +10,24 @@
  * Return: 0
  */
 
+
 int main(int argc, char *argv[])
 {
+	int a;
+	int b; 
+	char *op = argv[2];
+
+	int result;
+	int (*operator)(int, int) = get_op_func(op);
 
 	if (argc != 4)
 	{
 		printf("Error\n");
 		exit (98);
 	}
-
-	int a = atoi(argv[1]);
-	int b = atoi(argv[3]);
-	char op = argv[2];
-
-	int (*operator)(int, int) = get_op_func(op);
+	
+	a = atoi(argv[1]);
+        b = atoi(argv[3]);
 
 
 	if (!operator)
@@ -32,7 +36,7 @@ int main(int argc, char *argv[])
 		exit (99);
 	}
 
-	if (op != "/" || op != "%" && b == 0)
+	if ((*op == '/' || *op == '%') && b == 0)
 	{
 		printf("Error\n");
 		exit (100);
@@ -40,7 +44,8 @@ int main(int argc, char *argv[])
 
 	result = operator(a, b);
 
-	printf("%d\n")
+	printf("%d\n", result);
 
+	return (0);
 
 }
