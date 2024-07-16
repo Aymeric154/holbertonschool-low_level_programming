@@ -14,7 +14,7 @@
 int main(int argc, char *argv[])
 {
 	int a;
-	int b; 
+	int b;
 	char *op = argv[2];
 
 	int result;
@@ -23,23 +23,23 @@ int main(int argc, char *argv[])
 	if (argc != 4)
 	{
 		printf("Error\n");
-		exit (98);
+		exit(98);
 	}
-	
+
 	a = atoi(argv[1]);
-        b = atoi(argv[3]);
+	b = atoi(argv[3]);
 
 
 	if (!operator)
 	{
 		printf("Error\n");
-		exit (99);
+		exit(99);
 	}
 
 	if ((*op == '/' || *op == '%') && b == 0)
 	{
 		printf("Error\n");
-		exit (100);
+		exit(100);
 	}
 
 	result = operator(a, b);
