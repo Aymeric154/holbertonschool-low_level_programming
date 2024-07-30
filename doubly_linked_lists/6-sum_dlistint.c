@@ -8,7 +8,7 @@
  *  the data (n) of a dlistint_t linked list
  *
  *  @head: pointer to the header of list*
- * 
+ *
  *  Return: 0 if the list is empty
  */
 
