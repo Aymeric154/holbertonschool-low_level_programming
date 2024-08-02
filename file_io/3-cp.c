@@ -1,3 +1,4 @@
+#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -12,11 +13,8 @@
  * @code: The exit code to use
  * @format: The format string for the error message
  * @arg: The argument to insert into the format string
- *
- * Description: This function prints a formatted error message to the
- * standard error output, then exits the program with the specified
- * exit code.
  */
+
 void error_exit(int code, const char *format, const char *arg)
 {
 	dprintf(STDERR_FILENO, format, arg);
@@ -24,56 +22,23 @@ void error_exit(int code, const char *format, const char *arg)
 }
 
 /**
- * copy_file - Copies the content of one file to another
- * @src: The path to the source file
- * @dest: The path to the destination file
- *
- * Description: This function opens the source file and the destination
- * file, copies the content from the former to the latter in blocks of
- * BUFFER_SIZE bytes, and then closes both files. It handles errors for
- * opening, reading, writing, and closing the files.
+ * error_file - Handles file-related errors
+ * @file_from: The file descriptor of the source file
+ * @file_to: The file descriptor of the destination file
+ * @argv: The array of command-line arguments
  */
-void copy_file(const char *src, const char *dest)
+void error_file(int file_from, int file_to, char *argv[])
 {
-	int fd_from, fd_to;
-	ssize_t nread;
-	char buffer[BUFFER_SIZE], fd_str[20];
-
-	fd_from = open(src, O_RDONLY);
-	if (fd_from == -1)
-		error_exit(98, "Error: Can't read from file %s\n", src);
-
-	fd_to = open(dest, O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (fd_to == -1)
+	if (file_from == -1)
 	{
-		close(fd_from);
-		error_exit(99, "Error: Can't write to %s\n", dest);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
 	}
 
-	while ((nread = read(fd_from, buffer, BUFFER_SIZE)) > 0)
+	if (file_to == -1)
 	{
-		if (write(fd_to, buffer, nread) != nread)
-		{
-			close(fd_from);
-			close(fd_to);
-			error_exit(99, "Error: Can't write to %s\n", dest);
-		}
-	}
-	if (nread == -1)
-	{
-		close(fd_from);
-		close(fd_to);
-		error_exit(98, "Error: Can't read from file %s\n", src);
-	}
-	if (close(fd_from) == -1)
-	{
-		sprintf(fd_str, "%d", fd_from);
-		error_exit(100, "Error: Can't close fd %s\n", fd_str);
-	}
-	if (close(fd_to) == -1)
-	{
-		sprintf(fd_str, "%d", fd_to);
-		error_exit(100, "Error: Can't close fd %s\n", fd_str);
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		exit(99);
 	}
 }
 
@@ -82,18 +47,50 @@ void copy_file(const char *src, const char *dest)
  * @argc: The number of command-line arguments
  * @argv: An array of strings containing the command-line arguments
  *
- * Return: 0 on success, otherwise exits with an error code
- *
- * Description: This function checks if the correct number of arguments
- * is provided, then calls copy_file to perform the file copy operation.
- * If the number of arguments is incorrect, it prints a usage message
- * and exits the program.
+ * Return: 0
  */
+
+
 int main(int argc, char *argv[])
 {
-	if (argc != 3)
-		error_exit(97, "Usage: %s file_from file_to\n", argv[0]);
+	int fd_file_from, fd_file_to, n;
+	char buffer[1024];
 
-	copy_file(argv[1], argv[2]);
+	if (argc != 3)
+	{
+		dprintf(STDERR_FILENO, "%s\n", "Usage: cp file_from file_to");
+		exit(97);
+	}
+
+	fd_file_from = open(argv[1], O_RDONLY);
+
+	fd_file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+
+	error_file(fd_file_from, fd_file_to, argv);
+
+	while ((n = read(fd_file_from, buffer, 1024)) > 0)
+	{
+		if ((write(fd_file_to, buffer, n)) != n || fd_file_to < 0)
+		{
+			error_file(0, -1, argv);
+		}
+	}
+
+	if (n < 0)
+	{
+		error_file(-1, 0, argv);
+	}
+
+	if (close(fd_file_from) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_file_from);
+		exit(100);
+	}
+
+	if (close(fd_file_to) == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_file_to);
+		exit(100);
+	}
 	return (0);
 }
