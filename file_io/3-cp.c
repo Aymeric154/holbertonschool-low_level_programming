@@ -26,6 +26,46 @@ void error_exit(int code, const char *msg, const char *value)
 }
 
 /**
+ * open_file - Opens a file and handles potential errors
+ * @path: The path to the file to be opened
+ * @flags: The flags to be used when opening the file
+ * @mode: The mode to be used when creating a new file
+ *
+ * Return: The file descriptor of the opened file
+ */
+
+int open_file(const char *path, int flags, mode_t mode)
+{
+	int fd = open(path, flags, mode);
+
+	if (fd == -1)
+	{
+		if (flags & O_RDONLY)
+			error_exit(98, "Error: Can't read from file %s\n", path);
+		else
+			error_exit(99, "Error: Can't write to %s\n", path);
+	}
+	return (fd);
+}
+
+/**
+ * close_file - Closes a file and handles potential errors
+ * @fd: The file descriptor to be closed
+ */
+
+
+void close_file(int fd)
+{
+	char fd_str[20];
+
+	if (close(fd) == -1)
+	{
+		sprintf(fd_str, "%d", fd);
+		error_exit(100, "Error: Can't close fd %s\n", fd_str);
+	}
+}
+
+/**
  * cp_file - Copies the content from the source file
  * to the target file.
  * @source: Path to the source file.
@@ -37,18 +77,9 @@ void cp_file(const char *source, const char *target)
 	int fd_from, fd_to;
 	ssize_t nread;
 	char buf[1024];
-	char fd_str[20];
 
-	fd_from = open(source, O_RDONLY);
-	if (fd_from == -1)
-		error_exit(98, "Error: Can't read from file %s\n", source);
-
-	fd_to = open(target, O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (fd_to == -1)
-	{
-		close(fd_from);
-		error_exit(99, "Error: Can't write to %s\n", target);
-	}
+	fd_from = open_file(source, O_RDONLY, 0);
+	fd_to = open_file(target, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 
 	while ((nread = read(fd_from, buf, sizeof(buf))) > 0)
 	{
@@ -67,17 +98,8 @@ void cp_file(const char *source, const char *target)
 		error_exit(98, "Error: Can't read from file %s\n", source);
 	}
 
-	if (close(fd_from) == -1)
-	{
-		sprintf(fd_str, "%d", fd_from);
-		error_exit(100, "Error: Can't close fd %s\n", fd_str);
-	}
-
-	if (close(fd_to) == -1)
-	{
-		sprintf(fd_str, "%d", fd_to);
-		error_exit(100, "Error: Can't close fd %s\n", fd_str);
-	}
+	close_file(fd_from);
+	close_file(fd_to);
 }
 /**
  * main - Entry point of the program.
