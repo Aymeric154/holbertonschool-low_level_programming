@@ -16,44 +16,14 @@
  * in the error message.
  */
 
-void error_exit(int code, const char *msg, int value)
+void error_exit(int code, const char *msg, const char *value)
 {
-	if (value == -1)
-	{
-		dprintf(STDERR_FILENO, msg);
-	}
-	else
-	{
+	if (value)
 		dprintf(STDERR_FILENO, msg, value);
-	}
+	else
+		dprintf(STDERR_FILENO, "%s", msg);
 	exit(code);
 }
-
-
-/**
- * op_files - Opens the source and target files with appropriate flags.
- * @source: Path to the source file.
- * @target: Path to the target file.
- * @fd_from: Pointer to an integer
- * @fd_to: Pointer to an integer
- */
-
-void op_files(const char *source, const char *target, int *fd_from, int *fd_to)
-{
-	*fd_from = open(source, O_RDONLY);
-	if (*fd_from == -1)
-	{
-		error_exit(98, "Error: Can't read from file %s\n", source);
-	}
-
-	*fd_to = open(target, O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (*fd_to == -1)
-	{
-		close(*fd_from);
-		error_exit(99, "Error: Can't write to %s\n", target);
-	}
-}
-
 
 /**
  * cp_file - Copies the content from the source file
@@ -65,15 +35,24 @@ void op_files(const char *source, const char *target, int *fd_from, int *fd_to)
 void cp_file(const char *source, const char *target)
 {
 	int fd_from, fd_to;
-	char buffer[BUFFER_SIZE];
-	ssize_t bytes_read;
-	int error_code = 0;
+	ssize_t nread;
+	char buf[1024];
+	char fd_str[20];
 
-	op_files(source, target, &fd_from, &fd_to);
+	fd_from = open(source, O_RDONLY);
+	if (fd_from == -1)
+		error_exit(98, "Error: Can't read from file %s\n", source);
 
-	while ((bytes_read = read(fd_from, buffer, BUFFER_SIZE)) > 0)
+	fd_to = open(target, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (fd_to == -1)
 	{
-		if (write(fd_to, buffer, bytes_read) != bytes_read)
+		close(fd_from);
+		error_exit(99, "Error: Can't write to %s\n", target);
+	}
+
+	while ((nread = read(fd_from, buf, sizeof(buf))) > 0)
+	{
+		if (write(fd_to, buf, nread) != nread)
 		{
 			close(fd_from);
 			close(fd_to);
@@ -81,7 +60,7 @@ void cp_file(const char *source, const char *target)
 		}
 	}
 
-	if (bytes_read == -1)
+	if (nread == -1)
 	{
 		close(fd_from);
 		close(fd_to);
@@ -90,22 +69,16 @@ void cp_file(const char *source, const char *target)
 
 	if (close(fd_from) == -1)
 	{
-		error_code = 100;
-		error_exit(error_code, "Error: Can't close fd %d\n", fd_from);
+		sprintf(fd_str, "%d", fd_from);
+		error_exit(100, "Error: Can't close fd %s\n", fd_str);
 	}
 
 	if (close(fd_to) == -1)
 	{
-		error_code = 100;
-		error_exit(error_code, "Error: Can't close fd %d\n", fd_to);
-	}
-
-	if (error_code)
-	{
-		exit(error_code);
+		sprintf(fd_str, "%d", fd_to);
+		error_exit(100, "Error: Can't close fd %s\n", fd_str);
 	}
 }
-
 /**
  * main - Entry point of the program.
  * Validates arguments and starts the file copy process.
@@ -119,10 +92,10 @@ int main(int argc, char *argv[])
 {
 	if (argc != 3)
 	{
-		error_exit(97, "Usage: cp file_from file_to\n", -1);
+		error_exit(97, "Usage: cp file_from file_to\n", NULL);
 	}
 
-	copy_file(argv[1], argv[2]);
+	cp_file(argv[1], argv[2]);
 
 	return (0);
 }
