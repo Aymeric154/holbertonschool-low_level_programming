@@ -8,117 +8,66 @@
 #define BUFFER_SIZE 1024
 
 /**
- * error_exit - Prints an error message and
- * exits the program with a given code.
- * @code: The exit code for the program.
- * @msg: The format string for the error message.
- * @value: An optional integer value to be included
- * in the error message.
+ * error_exit - Prints an error message and exits the program
+ * @code: The exit code to use
+ * @format: The format string for the error message
+ * @arg: The argument to insert into the format string
  */
-
-void error_exit(int code, const char *msg, const char *value)
+void error_exit(int code, const char *format, const char *arg)
 {
-	if (value)
-		dprintf(STDERR_FILENO, msg, value);
-	else
-		dprintf(STDERR_FILENO, "%s", msg);
+	dprintf(STDERR_FILENO, format, arg);
 	exit(code);
 }
 
 /**
- * open_file - Opens a file and handles potential errors
- * @path: The path to the file to be opened
- * @flags: The flags to be used when opening the file
- * @mode: The mode to be used when creating a new file
- *
- * Return: The file descriptor of the opened file
+ * copy_file - Copies the content of one file to another
+ * @src: The path to the source file
+ * @dest: The path to the destination file
  */
 
-int open_file(const char *path, int flags, mode_t mode)
-{
-	int fd = open(path, flags, mode);
-
-	if (fd == -1)
-	{
-		if (flags & O_RDONLY)
-			error_exit(98, "Error: Can't read from file %s\n", path);
-		else
-			error_exit(99, "Error: Can't write to %s\n", path);
-	}
-	return (fd);
-}
-
-/**
- * close_file - Closes a file and handles potential errors
- * @fd: The file descriptor to be closed
- */
-
-
-void close_file(int fd)
-{
-	char fd_str[20];
-
-	if (close(fd) == -1)
-	{
-		sprintf(fd_str, "%d", fd);
-		error_exit(100, "Error: Can't close fd %s\n", fd_str);
-	}
-}
-
-/**
- * cp_file - Copies the content from the source file
- * to the target file.
- * @source: Path to the source file.
- * @target: Path to the target file.
- */
-
-void cp_file(const char *source, const char *target)
+void copy_file(const char *src, const char *dest)
 {
 	int fd_from, fd_to;
 	ssize_t nread;
-	char buf[1024];
+	char buffer[BUFFER_SIZE];
 
-	fd_from = open_file(source, O_RDONLY, 0);
-	fd_to = open_file(target, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	fd_from = open(src, O_RDONLY);
+	if (fd_from == -1)
+		error_exit(98, "Error: Can't read from file %s\n", src);
 
-	while ((nread = read(fd_from, buf, sizeof(buf))) > 0)
+	fd_to = open(dest, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (fd_to == -1)
+		error_exit(99, "Error: Can't write to %s\n", dest);
+
+	while ((nread = read(fd_from, buffer, BUFFER_SIZE)) > 0)
 	{
-		if (write(fd_to, buf, nread) != nread)
-		{
-			close(fd_from);
-			close(fd_to);
-			error_exit(99, "Error: Can't write to %s\n", target);
-		}
+		if (write(fd_to, buffer, nread) != nread)
+			error_exit(99, "Error: Can't write to %s\n", dest);
 	}
 
 	if (nread == -1)
-	{
-		close(fd_from);
-		close(fd_to);
-		error_exit(98, "Error: Can't read from file %s\n", source);
-	}
+		error_exit(98, "Error: Can't read from file %s\n", src);
 
-	close_file(fd_from);
-	close_file(fd_to);
+	if (close(fd_from) == -1)
+		error_exit(100, "Error: Can't close fd %d\n", (void *)(intptr_t)fd_from);
+
+	if (close(fd_to) == -1)
+		error_exit(100, "Error: Can't close fd %d\n", (void *)(intptr_t)fd_to);
 }
+
 /**
- * main - Entry point of the program.
- * Validates arguments and starts the file copy process.
- * @argc: Number of command-line arguments.
- * @argv: Array of command-line argument strings.
+ * main - Entry point of the program
+ * @argc: The number of command-line arguments
+ * @argv: An array of strings containing the command-line arguments
  *
- * Return: 0 on success, exits with code 97 on argument error.
+ * Return: 0 on success, otherwise exits with an error code
  */
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[])i
 {
 	if (argc != 3)
-	{
-		error_exit(97, "Usage: cp file_from file_to\n", NULL);
-	}
+		error_exit(97, "Usage: %s file_from file_to\n", argv[0]);
 
-	cp_file(argv[1], argv[2]);
-
+	copy_file(argv[1], argv[2]);
 	return (0);
 }
-
