@@ -63,7 +63,7 @@ void copy_file(const char *src, const char *dest)
  * Return: 0 on success, otherwise exits with an error code
  */
 
-int main(int argc, char *argv[])i
+int main(int argc, char *argv[])
 {
 	if (argc != 3)
 		error_exit(97, "Usage: %s file_from file_to\n", argv[0]);
