@@ -7,70 +7,123 @@
 
 #define BUFFER_SIZE 1024
 
-void error_exit(int code, const char *msg, const char *file_name) {
-	dprintf(STDERR_FILENO, msg, file_name);
+/**
+ * error_exit - Prints an error message and
+ * exits the program with a given code.
+ * @code: The exit code for the program.
+ * @msg: The format string for the error message.
+ * @value: An optional integer value to be included
+ * in the error message.
+ */
+
+void error_exit(int code, const char *msg, int value)
+{
+	if (value == -1)
+	{
+		dprintf(STDERR_FILENO, msg);
+	}
+	else
+	{
+		dprintf(STDERR_FILENO, msg, value);
+	}
 	exit(code);
 }
 
-int open_file(const char *file_name, int flags, mode_t mode) {
-	int fd = open(file_name, flags, mode);
-	if (fd == -1) {
-		error_exit(98, "Error: Can't read from file %s\n", file_name);
+
+/**
+ * op_files - Opens the source and target files with appropriate flags.
+ * @source: Path to the source file.
+ * @target: Path to the target file.
+ * @fd_from: Pointer to an integer
+ * @fd_to: Pointer to an integer
+ */
+
+void op_files(const char *source, const char *target, int *fd_from, int *fd_to)
+{
+	*fd_from = open(source, O_RDONLY);
+	if (*fd_from == -1)
+	{
+		error_exit(98, "Error: Can't read from file %s\n", source);
 	}
-	return fd;
+
+	*fd_to = open(target, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (*fd_to == -1)
+	{
+		close(*fd_from);
+		error_exit(99, "Error: Can't write to %s\n", target);
+	}
 }
 
-int create_file(const char *file_name) {
-	int fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (fd == -1) {
-		error_exit(99, "Error: Can't write to %s\n", file_name);
-	}
-	return fd;
-}
 
-void close_file(int fd, int *error_code) {
-	if (close(fd) == -1) {
-		*error_code = 100;
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-	}
-}
+/**
+ * cp_file - Copies the content from the source file
+ * to the target file.
+ * @source: Path to the source file.
+ * @target: Path to the target file.
+ */
 
-void _cp(const char *source, const char *target) {
-	int fd_from = open_file(source, O_RDONLY, 0);
-	int fd_to = create_file(target);
-	int error_code = 0;
-	char buffer[1024];
+void cp_file(const char *source, const char *target)
+{
+	int fd_from, fd_to;
+	char buffer[BUFFER_SIZE];
 	ssize_t bytes_read;
-	while ((bytes_read = read(fd_from, buffer, 1024)) > 0) {
-		if (write(fd_to, buffer, bytes_read) != bytes_read) {
-			close_file(fd_from, NULL);
-			close_file(fd_to, NULL);
+	int error_code = 0;
+
+	op_files(source, target, &fd_from, &fd_to);
+
+	while ((bytes_read = read(fd_from, buffer, BUFFER_SIZE)) > 0)
+	{
+		if (write(fd_to, buffer, bytes_read) != bytes_read)
+		{
+			close(fd_from);
+			close(fd_to);
 			error_exit(99, "Error: Can't write to %s\n", target);
 		}
 	}
 
-	if (bytes_read == -1) {
-		close_file(fd_from, NULL);
-		close_file(fd_to, NULL);
+	if (bytes_read == -1)
+	{
+		close(fd_from);
+		close(fd_to);
 		error_exit(98, "Error: Can't read from file %s\n", source);
 	}
 
-	close_file(fd_from, &error_code);
-	close_file(fd_to, &error_code);
+	if (close(fd_from) == -1)
+	{
+		error_code = 100;
+		error_exit(error_code, "Error: Can't close fd %d\n", fd_from);
+	}
 
-	if (error_code) {
+	if (close(fd_to) == -1)
+	{
+		error_code = 100;
+		error_exit(error_code, "Error: Can't close fd %d\n", fd_to);
+	}
+
+	if (error_code)
+	{
 		exit(error_code);
 	}
 }
 
-int main(int argc, char *argv[]) {
-	if (argc != 3) {
-		error_exit(97, "Usage: cp file_from file_to\n", NULL);
+/**
+ * main - Entry point of the program.
+ * Validates arguments and starts the file copy process.
+ * @argc: Number of command-line arguments.
+ * @argv: Array of command-line argument strings.
+ *
+ * Return: 0 on success, exits with code 97 on argument error.
+ */
+
+int main(int argc, char *argv[])
+{
+	if (argc != 3)
+	{
+		error_exit(97, "Usage: cp file_from file_to\n", -1);
 	}
 
-	_cp(argv[1], argv[2]);
+	copy_file(argv[1], argv[2]);
 
-	return 0;
+	return (0);
 }
-
 
